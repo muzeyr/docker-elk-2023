@@ -483,3 +483,23 @@ See the following Wiki pages:
 [ls-docker]: https://www.elastic.co/guide/en/logstash/current/docker-config.html
 
 [upgrade]: https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html
+
+
+
+## Notes
+
+docker-compose ps | tail -n +3 | awk '{print $1}' | xargs -n1 docker logs
+
+
+curl -s -X GET --cacert "/etc/elasticsearch/https-ca.crt" -H "Authorization: Basic `echo -n kibana_system:findselk|base64 -`" http://18.132.12.6:9200/_security/_authenticate?pretty=true
+
+
+
+
+
+sudo docker logs -f --tail 10 a0fd94f74212
+
+
+
+{"@timestamp":"2023-01-29T17:36:35.738Z", "log.level":"ERROR", "message":"fatal exception while booting Elasticsearch", "ecs.version": "1.2.0","service.name":"ES_ECS","event.dataset":"elasticsearch.server","process.thread.name":"main","log.logger":"org.elasticsearch.bootstrap.Elasticsearch","elasticsearch.node.name":"elasticsearch","elasticsearch.cluster.name":"docker-cluster","error.type":"java.lang.IllegalArgumentException","error.message":"unknown setting [elasticsearch.username] please check that any required plugins are installed, or check the breaking changes documentation for removed settings","error.stack_trace":"java.lang.IllegalArgumentException: unknown setting [elasticsearch.username] please check that any required plugins are installed, or check the breaking changes documentation for removed settings\n\tat org.elasticsearch.server@8.5.3/org.elasticsearch.common.settings.AbstractScopedSettings.validate(AbstractScopedSettings.java:561)\n\tat org.elasticsearch.server@8.5.3/org.elasticsearch.common.settings.AbstractScopedSettings.validate(AbstractScopedSettings.java:507)\n\tat org.elasticsearch.server@8.5.3/org.elasticsearch.common.settings.AbstractScopedSettings.validate(AbstractScopedSettings.java:477)\n\tat org.elasticsearch.server@8.5.3/org.elasticsearch.common.settings.AbstractScopedSettings.validate(AbstractScopedSettings.java:447)\n\tat org.elasticsearch.server@8.5.3/org.elasticsearch.common.settings.SettingsModule.<init>(SettingsModule.java:151)\n\tat org.elasticsearch.server@8.5.3/org.elasticsearch.common.settings.SettingsModule.<init>(SettingsModule.java:56)\n\tat org.elasticsearch.server@8.5.3/org.elasticsearch.node.Node.<init>(Node.java:468)\n\tat org.elasticsearch.server@8.5.3/org.elasticsearch.node.Node.<init>(Node.java:318)\n\tat org.elasticsearch.server@8.5.3/org.elasticsearch.bootstrap.Elasticsearch$2.<init>(Elasticsearch.java:214)\n\tat org.elasticsearch.server@8.5.3/org.elasticsearch.bootstrap.Elasticsearch.initPhase3(Elasticsearch.java:214)\n\tat org.elasticsearch.server@8.5.3/org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:67)\n\tSuppressed: java.lang.IllegalArgumentException: unknown setting [elasticsearch.password] please check that any required plugins are installed, or check the breaking changes documentation for removed settings\n\t\t... 11 more\n"}
+ERROR: Elasticsearch did not exit normally - check the logs at /usr/share/elasticsearch/logs/docker-cluster.log
